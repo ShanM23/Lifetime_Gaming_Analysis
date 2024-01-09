@@ -4,3 +4,5 @@ FROM Games
 INNER JOIN Platforms ON Games.platform_id=Platforms.platform_id;
 
 </sql><current_tab id="0"/></tab_sql></sqlb_project>
+git rm vg.sqbpro
+git commit -m "remove vg.sqbpro"
