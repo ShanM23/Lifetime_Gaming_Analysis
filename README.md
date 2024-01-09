@@ -25,5 +25,8 @@ _**5. Analysis**_
 _**6. Visualization**_
 
   Transferred data into Tableau to create a dynamic dashboard.
-
+  
 ## Key Findings: IN PROGRESS...
+## 📁 Files
+* [vg.sqbpro]
+* [SQL Queries]
