@@ -30,3 +30,4 @@ _**6. Visualization**_
 ## 📁 Files
 * [vg.sqbpro]
 * [SQL Queries](https://github.com/ShanM23/Lifetime_Gaming_Analysis/blob/main/SQL%20Queries)
+* [Viz](https://public.tableau.com/app/profile/shankeria.mathews/viz/PersonalGamingAnalysis/PlayedVideoGameAnalysis)
