@@ -1,0 +1,98 @@
+--Displays Games table--
+SELECT *
+FROM vg.Games;
+
+--Displays Platforms table--
+SELECT *
+FROM vg.Platforms;
+
+--Displays video games and corresponding platforms they were played on--
+SELECT Games.platform_id, Games.title, Games.release_year, Platforms.Xbox_One, Platforms.Xbox_360,
+Platforms.Xbox, Platforms.Wii, Platforms.PSP, Platforms.PS2, Platforms.PC, Platforms.Nintendo_DS, Platforms.Nintendo_64, Platforms.Dreamcast
+FROM vg.Games
+INNER JOIN Platforms ON Games.platform_id=Platforms.platform_id;
+
+-- 1. What is the oldest video game I've ever played and on what console?
+SELECT Games.platform_id, Games.title, Games.release_year, Platforms.Xbox_One, Platforms.Xbox_360,
+Platforms.Xbox, Platforms.Wii, Platforms.PSP, Platforms.PS2, Platforms.PC, Platforms.Nintendo_DS, Platforms.Nintendo_64, Platforms.Dreamcast
+FROM vg.Games
+INNER JOIN Platforms ON Games.platform_id=Platforms.platform_id
+ORDER BY release_year
+LIMIT 1;
+
+-- 2. What are my top 5 favorite publishers?--
+SELECT publisher, COUNT(*) as games_played
+FROM vg.Games
+GROUP BY publisher
+ORDER BY games_played desc
+LIMIT 5;
+
+-- 3. Out of which genre am I more likely to purchase a game?--
+SELECT genre, COUNT(*) as top_genre
+FROM vg.Games
+GROUP BY genre
+ORDER BY top_genre desc
+LIMIT 1;
+
+-- 4. What game series (plural) am I a fan of?--
+SELECT title,
+CASE WHEN SUBSTR(title, 1, 5) = 'Grand' THEN 'GTA'
+WHEN SUBSTR(title, 1, 6) = 'Deus E' THEN 'Deus Ex'
+WHEN SUBSTR(title, 1, 6) = 'The Go' THEN 'The Godfather'
+WHEN SUBSTR(title, 1, 6) = 'True C' THEN 'True Crime'
+WHEN SUBSTR(title, 1, 5) = 'Mafia' THEN 'Mafia'
+WHEN SUBSTR(title, 1, 6) = 'Hitman' THEN 'Hitman'
+WHEN SUBSTR(title, 1, 6) = 'Wolfen' THEN 'Wolfenstein'
+WHEN SUBSTR(title, 1, 6) = 'Dishon' THEN 'Dishonored'
+WHEN SUBSTR(title, 1, 5) = 'Dying' THEN 'Dying Light'
+WHEN SUBSTR(title, 1, 6) = 'Red De' THEN 'RDR'
+WHEN SUBSTR(title, 1, 6) = 'Battle' THEN 'Battlefield'
+WHEN SUBSTR(title, 1, 6) = 'State' THEN 'State of Decay'
+WHEN SUBSTR(title, 1, 6) = 'Dead R' THEN 'Dead Rising'
+WHEN SUBSTR(title, 1, 6) = 'Saints' THEN 'Saints Row'
+WHEN SUBSTR(title, 1, 6) = 'Fallou' THEN 'Fallout'
+WHEN SUBSTR(title, 1, 6) = 'PAYDAY' THEN 'PAYDAY'
+WHEN SUBSTR(title, 1, 6) = 'Assass' THEN 'Assassin''s Creed'
+WHEN SUBSTR(title, 1, 6) = 'Call o' THEN 'Call of Duty'
+WHEN SUBSTR(title, 1, 6) = 'The Si' THEN 'The Sims'
+WHEN SUBSTR(title, 1, 5) = 'Fable' THEN 'Fable'
+WHEN SUBSTR(title, 4, 15) LIKE '%Mario%' THEN 'Super Mario'
+WHEN SUBSTR(title, 1, 13) LIKE '007' THEN '007'
+WHEN SUBSTR(title, 1, 6) = 'Midnig' THEN 'Midnight Club'
+WHEN SUBSTR(title, 1, 6)= 'Mass E' THEN 'Mass Effect'
+WHEN SUBSTR(title, 1, 6) = 'Manhun' THEN 'Manhunt'
+WHEN SUBSTR(title, 1, 6) = 'Kane &' THEN 'Kane & Lynch'
+WHEN SUBSTR(title, 1, 5) = 'Skate' THEN 'Skate'
+WHEN SUBSTR(title, 1, 6) = 'NFL St' THEN 'NFL Street'
+ELSE 'n/a' END Series
+FROM vg.Games
+WHERE Series != 'n/a'
+HAVING Series
+ORDER BY Series;
+
+-- 5. How many games have I played that have a "Universal Acclaim" Metacritic score?--
+SELECT title, meta_score,
+CASE WHEN meta_score <20 THEN 'Overall Dislike'
+WHEN meta_score BETWEEN 20 AND 49 THEN 'Generally Unfavorable'
+WHEN meta_score BETWEEN 50 AND 74 THEN 'Mixed or Average'
+WHEN meta_score BETWEEN 75 AND 89 THEN 'Generally Favorable'
+WHEN meta_score BETWEEN 90 AND 100 THEN 'Universal Acclaim'
+ELSE 'Unscored' END Indication
+FROM vg.Games
+WHERE Indication = 'Universal Acclaim';
+
+-- 6. Which games have I played that have a "Generally Unfavorable" Metacritic score?--
+SELECT title, meta_score,
+CASE WHEN meta_score <20 THEN 'Overall Dislike'
+WHEN meta_score BETWEEN 20 AND 49 THEN 'Generally Unfavorable'
+WHEN meta_score BETWEEN 50 AND 74 THEN 'Mixed or Average'
+WHEN meta_score BETWEEN 75 AND 89 THEN 'Generally Favorable'
+WHEN meta_score BETWEEN 90 AND 100 THEN 'Universal Acclaim'
+ELSE 'Unscored' END Indication
+FROM vg.Games
+WHERE Indication = 'Generally Unfavorable';
+
+-- 7. Which platform have I played the most games on?--
+SELECT COUNT(Dreamcast), COUNT(Nintendo_64), COUNT(Wii), COUNT(Nintendo_DS), COUNT(PSP),
+COUNT(PS2), COUNT(Xbox), COUNT(Xbox_360), COUNT(Xbox_One), COUNT(PC)
+FROM vg.Platforms;
