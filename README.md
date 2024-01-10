@@ -55,6 +55,6 @@ _**7. Which platform have I played the most games on?**_
 
       Xbox 360, 62 video games
 ## 📁 Files
-* 
+* [Video Game Database](https://github.com/ShanM23/Lifetime_Gaming_Analysis/blob/main/vg.project): downloadable database compatible with DB Browser and SQLite if you would like to analyze the data
 * [SQL Queries](https://github.com/ShanM23/Lifetime_Gaming_Analysis/blob/main/SQL%20Queries): queries I ran to analyze the data
 * [Viz](https://public.tableau.com/app/profile/shankeria.mathews/viz/PersonalGamingAnalysis/PlayedVideoGameAnalysis): visualization shared in Tableau
